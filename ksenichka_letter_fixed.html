@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Для Ксенечки ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;overflow:hidden;
+ font-family:Georgia,"Times New Roman",serif;color:white;
+ background:radial-gradient(circle at center,#4a2035 0,#1b0d18 48%,#08050a 100%);
+}
+#app{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:20px}
+.bg{position:absolute;inset:0;overflow:hidden}
+.flower{position:absolute;font-size:38px;opacity:.7;animation:float 5s ease-in-out infinite}
+.a{left:7%;top:12%}.b{right:8%;top:18%;animation-delay:1s}
+.c{left:10%;bottom:15%;animation-delay:2s}.d{right:10%;bottom:12%;animation-delay:3s}
+@keyframes float{50%{transform:translateY(-18px) rotate(8deg)}}
+.box{
+ position:relative;z-index:2;width:min(420px,92vw);padding:38px 25px;
+ text-align:center;border-radius:26px;background:rgba(30,13,24,.82);
+ border:1px solid rgba(255,180,205,.25);box-shadow:0 25px 80px #0009;
+}
+.box h1{font-weight:400;margin:0 0 10px;font-size:32px}
+.sub{color:#e9bdcc;margin-bottom:25px}
+input{
+ display:block;width:100%;height:54px;border-radius:14px;
+ border:1px solid #9d536f;background:#ffffff0d;color:#fff;
+ text-align:center;font-size:22px;letter-spacing:8px;outline:0;
+}
+button{
+ display:block;width:100%;height:52px;margin-top:14px;border:0;border-radius:14px;
+ background:#c8537b;color:#fff;font-size:17px;cursor:pointer;
+}
+#error{height:22px;margin-top:10px;color:#ff9fbd;font-size:14px}
+#letter{
+ display:none;position:relative;z-index:10;width:min(600px,94vw);
+ max-height:90vh;overflow:auto;padding:30px 25px;border-radius:22px;
+ background:#fff8f5;color:#402633;box-shadow:0 25px 90px #000b;
+ line-height:1.65;font-size:18px;
+ animation:appear 1.1s ease forwards;
+}
+#letter h2{text-align:center;color:#a64c6b;font-weight:400;margin-top:0}
+#letter p{margin:0 0 15px}
+.heart{text-align:center;font-size:30px}
+@keyframes appear{from{opacity:0;transform:translateY(25px) scale(.94)}to{opacity:1;transform:none}}
+.petal{
+ position:fixed;z-index:20;width:10px;height:16px;background:#ff9fbd;
+ border-radius:100% 0 100% 0;pointer-events:none;
+}
+</style>
+</head>
+<body>
+<div id="app">
+ <div class="bg">
+  <div class="flower a">🌸</div><div class="flower b">🌷</div>
+  <div class="flower c">🌺</div><div class="flower d">🌸</div>
+ </div>
+
+ <div class="box" id="login">
+  <div style="font-size:38px">💌</div>
+  <h1>Для Ксенечки</h1>
+  <div class="sub">Здесь спрятано кое-что от меня для тебя</div>
+  <input id="pass" type="password" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••">
+  <button type="button" onclick="openLetter()">Открыть письмо</button>
+  <div id="error"></div>
+ </div>
+
+ <div id="letter">
+  <h2>Ксенечка, доброе утро ❤️</h2>
+  <p>Доброе утро, кицик.</p>
+  <p>Надеюсь, что ты выспалась<br>и это утро будет приятным.</p>
+  <p>Хочу сказать, что очень очень очень очень сильно люблю тебя.<br>И очень скучаю.</p>
+  <p>Безумно скучаю.. и терпеть уже не могу поскорее тебя обнять.</p>
+  <p>Не буду сильно занимать твое время.<br>Тебе еще там зубки чистить, умываться 😊</p>
+  <p>Люблю тебя, милая.<br>Все будет хорошо &lt;3</p>
+  <div class="heart">❤️</div>
+ </div>
+</div>
+
+<script>
+function openLetter(){
+ var value=document.getElementById("pass").value;
+ if(value==="1205"){
+   var login=document.getElementById("login");
+   var letter=document.getElementById("letter");
+   login.style.display="none";
+   letter.style.display="block";
+   for(var i=0;i<35;i++) makePetal();
+ }else{
+   document.getElementById("error").textContent="Попробуй ещё раз ❤️";
+ }
+}
+document.getElementById("pass").addEventListener("keydown",function(e){
+ if(e.key==="Enter") openLetter();
+});
+function makePetal(){
+ var p=document.createElement("div");
+ p.className="petal";
+ p.style.left="50%";p.style.top="50%";
+ document.body.appendChild(p);
+ var x=(Math.random()-.5)*innerWidth*1.4;
+ var y=(Math.random()-.5)*innerHeight*1.4;
+ var r=(Math.random()-.5)*720;
+ p.animate([
+  {transform:"translate(-50%,-50%) scale(.2)",opacity:0},
+  {transform:"translate("+x+"px,"+y+"px) rotate("+r+"deg) scale(1)",opacity:0}
+ ],{duration:1200+Math.random()*900,easing:"ease-out"}).onfinish=function(){p.remove()};
+}
+</script>
+</body>
+</html>
